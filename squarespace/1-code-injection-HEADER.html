@@ -38,14 +38,14 @@ html,body{background:var(--bg)}
 .pd-site .fig{display:block;overflow:hidden;min-width:0}
 @media (max-width:900px){.pd-site .fig[style*="border-radius:30px"],.pd-site a.blk[style*="border-radius:30px"]{border-radius:24px!important}}
 .pd-site .im{display:block;width:100%;height:auto}
-.pd-site .fig .im{height:100%;object-fit:cover}
+.pd-site .fig .im{height:100%;object-fit:cover;transform:scale(1.012)}
 .pd-site .only-light{display:none}
 html[data-theme="light"] .pd-site .adapt{color:var(--lc)!important}
 html[data-theme="light"] .pd-site .only-light{display:block}
 html[data-theme="light"] .pd-site .only-dark{display:none}
 .pd-site .blk{display:flex;color:inherit;transition:opacity .2s,transform .2s}
 .pd-site a.blk:hover{opacity:.92}
-.pd-site a.blk:hover .fig .im{transform:scale(1.015)}
+.pd-site a.blk:hover .fig .im{transform:scale(1.03)}
 .pd-site .fig .im{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
 .pd-site :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 .pd-vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -66,6 +66,11 @@ html[data-theme="light"] .pd-site .pill--primary:hover{background:#333;border-co
 /* nav */
 .pd-nav{position:relative;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:40px var(--gut) 40px max(40px,calc(50vw - 755px));color:var(--text)}
 .pd-nav--over{position:absolute;top:0;left:0;right:0;color:#fff}
+.pd-nav .pd-sound{position:static;width:auto;height:auto;min-height:0;padding:14px 4px;background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:0;color:inherit;transform:none}
+.pd-nav .pd-sound:hover{background:none;transform:none;opacity:.7}
+.pd-nav .pd-sound svg{width:15px;height:15px}
+.pd-cvl{display:flex;align-items:center;gap:20px}
+@media (max-width:900px){.pd-nav>.pd-sound{margin-left:auto;margin-right:8px;padding:14px 8px}.pd-nav .pd-sound svg{width:18px;height:18px}}
 .pd-logo{display:inline-flex;flex:0 0 auto}
 .pd-logo svg{height:40px;width:auto}
 .pd-links ul{display:flex;gap:14px;align-items:center}
@@ -169,6 +174,15 @@ html[data-theme="light"] .pd-site .pill--primary:hover{background:#333;border-co
 .pd-site .caserow--margins:hover h2.t,.pd-site .caserow--margins:focus-visible h2.t{color:#e0896a!important}
 .pd-site .caserow--concur:hover h2.t,.pd-site .caserow--concur:focus-visible h2.t{color:#d4f26a!important}
 html[data-theme="light"] .pd-site .caserow:hover h2.t,html[data-theme="light"] .pd-site .caserow:focus-visible h2.t{color:var(--text)!important}
+.pd-site section[aria-label="Next project"] h2.t{transition:color .45s cubic-bezier(.22,1,.36,1)}
+.pd-site section[aria-label="Next project"] a[href$="/iksa"]:hover h2.t,.pd-site section[aria-label="Next project"] a[href$="iksa.html"]:hover h2.t{color:#5e9497!important}
+.pd-site section[aria-label="Next project"] a[href$="/equerry-co"]:hover h2.t,.pd-site section[aria-label="Next project"] a[href$="equerry-co.html"]:hover h2.t{color:#ff6a3d!important}
+.pd-site section[aria-label="Next project"] a[href$="/portfolio-rebuild"]:hover h2.t,.pd-site section[aria-label="Next project"] a[href$="portfolio-rebuild.html"]:hover h2.t{color:#f4a6c6!important}
+.pd-site section[aria-label="Next project"] a[href$="/butter-and-bloom"]:hover h2.t,.pd-site section[aria-label="Next project"] a[href$="butter-and-bloom.html"]:hover h2.t{color:#d9c4e8!important}
+.pd-site section[aria-label="Next project"] a[href$="/dew"]:hover h2.t,.pd-site section[aria-label="Next project"] a[href$="dew.html"]:hover h2.t{color:#a9c29b!important}
+.pd-site section[aria-label="Next project"] a[href$="/margins"]:hover h2.t,.pd-site section[aria-label="Next project"] a[href$="margins.html"]:hover h2.t{color:#e0896a!important}
+.pd-site section[aria-label="Next project"] a[href$="/concur"]:hover h2.t,.pd-site section[aria-label="Next project"] a[href$="concur.html"]:hover h2.t{color:#d4f26a!important}
+html[data-theme="light"] .pd-site section[aria-label="Next project"] a:hover h2.t{color:var(--text)!important}
 .pd-site .caserow{position:relative}
 .pd-site .f[style*="display:grid"]>.f[style*="flex-direction:column"]>:last-child:not(:first-child){margin-top:auto}
 .pd-site .caserow__pv{position:absolute;right:calc(100% + 20.8%);top:50%;width:47.4%;aspect-ratio:403/244;border-radius:4.3%/7.1%;overflow:hidden;background:#000;opacity:0;transform:translateY(calc(-50% + var(--pvy,0px) + 12px)) scale(.97);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1);pointer-events:none;display:none;will-change:opacity,transform}
