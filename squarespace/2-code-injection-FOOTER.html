@@ -1,0 +1,61 @@
+<!-- Pooja Dodia portfolio · Settings → Advanced → Code Injection → FOOTER -->
+<button class="pd-theme" type="button" aria-label="Switch to light mode">
+<svg class="moon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+<svg class="sun" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+</button>
+<script>/* After uploading the hero video to Squarespace, paste its URL between the quotes */
+window.PD_HERO_VIDEO='';</script>
+<script>(function(){
+var root=document.documentElement,d=document;
+/* theme */
+var tb=d.querySelector('.pd-theme');
+function lab(){if(tb)tb.setAttribute('aria-label',root.getAttribute('data-theme')==='light'?'Switch to dark mode':'Switch to light mode');}
+lab();
+if(tb)tb.addEventListener('click',function(){var l=root.getAttribute('data-theme')!=='light';if(l)root.setAttribute('data-theme','light');else root.removeAttribute('data-theme');try{localStorage.setItem('pd-theme',l?'light':'dark');}catch(e){}lab();});
+/* mobile menu */
+var nav=d.querySelector('.pd-nav'),mb=d.querySelector('.pd-menu');
+if(mb)mb.addEventListener('click',function(){var o=!nav.classList.contains('is-open');nav.classList.toggle('is-open',o);mb.setAttribute('aria-expanded',o);});
+d.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav&&nav.classList.contains('is-open')){nav.classList.remove('is-open');mb.setAttribute('aria-expanded','false');mb.focus();}});
+/* filters */
+var F={"work": {"All": "*", "Client work": "IKSA Equerry", "Concepts": "BB Dew Margins Concur", "Experimentation": "Dew", "Mobile": "BB Dew Margins Concur", "Accessibility": "PR BB"}, "notes": {"All": "*", "Launching": "IKSA", "Research": "Margins BB A11y Row", "Writing": "IKSA BB Row", "Accessibility": "A11y"}};
+d.querySelectorAll('.pd-site[data-filters]').forEach(function(site){
+ var set=F[site.getAttribute('data-filters')];if(!set)return;
+ var chips=site.querySelectorAll('.chip--filter');
+ chips.forEach(function(c){c.addEventListener('click',function(){
+  chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});
+  var keys=set[c.getAttribute('data-filter')]||'*';
+  site.querySelectorAll('.fcard').forEach(function(card){var k=card.getAttribute('data-key');card.hidden=!(keys==='*'||(' '+keys+' ').indexOf(' '+k+' ')>-1);});
+ });});
+});
+/* hero video + sound (video file set in data-src once uploaded) */
+var hero=d.querySelector('.pd-hero'),v=hero&&hero.querySelector('video'),sb=hero&&hero.querySelector('.pd-sound');
+var src=window.PD_HERO_VIDEO||'';
+if(v&&src&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
+ v.src=src;v.play().then(function(){hero.classList.add('is-playing');if(sb)sb.hidden=false;}).catch(function(){});
+ if(sb)sb.addEventListener('click',function(){v.muted=!v.muted;sb.setAttribute('aria-pressed',String(!v.muted));});
+}
+/* contact form: opens the visitor's email app with the message filled in */
+var form=d.querySelector('.pd-form');
+if(form)form.addEventListener('submit',function(e){e.preventDefault();var ok=true;
+ ['name','email','message'].forEach(function(n){var el=form.elements[n];var bad=!el.value.trim()||(n==='email'&&!/^\S+@\S+\.\S+$/.test(el.value));el.setAttribute('aria-invalid',bad?'true':'false');if(bad&&ok){el.focus();ok=false;}});
+ var note=form.querySelector('.pd-note');
+ if(!ok){note.textContent='Please fill in your name, a valid email and a message.';return;}
+ var t=(form.querySelector('input[name=topic]:checked')||{}).value||'Hello';
+ var body=form.elements.message.value+'\n\n'+form.elements.name.value+'\n'+form.elements.email.value;
+ location.href='mailto:'+form.getAttribute('data-to')+'?subject='+encodeURIComponent(t+' · from your portfolio')+'&body='+encodeURIComponent(body);
+ note.textContent='Your email app should open with the message ready to send.';
+});
+d.querySelectorAll('.pd-copy').forEach(function(b){b.addEventListener('click',function(){var a=b.getAttribute('data-copy');(navigator.clipboard?navigator.clipboard.writeText(a):Promise.reject()).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy address';},2000);}).catch(function(){b.textContent=a;});});});
+/* notes: highlight the part you are reading */
+var toc=[].slice.call(d.querySelectorAll('.pd-site a[href^="#s-"]')).filter(function(a){return a.closest('.toc');});
+var lock=0;
+function setOn(a){toc.forEach(function(x){x.classList.remove('toc-on');x.removeAttribute('aria-current');});if(a){a.classList.add('toc-on');a.setAttribute('aria-current','true');}}
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.pd-site a[href^="#"]');if(!a)return;var id=a.getAttribute('href').slice(1);if(!id)return;var t=document.getElementById(id);if(!t)return;e.preventDefault();var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;if(toc.indexOf(a)>-1){setOn(a);lock=Date.now()+1200;}t.scrollIntoView({behavior:rm?'auto':'smooth',block:'start'});try{history.replaceState(null,'','#'+id);}catch(err){}});
+if(toc.length){
+ var secs=toc.map(function(a){return d.getElementById(a.getAttribute('href').slice(1));});
+ var tick=0;
+ function upd(){tick=0;if(Date.now()<lock)return;var line=innerHeight*0.3,cur=0;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<=line)cur=i;});if(innerHeight+scrollY>=d.documentElement.scrollHeight-4){for(var i=secs.length-1;i>=0;i--){if(secs[i]&&secs[i].getBoundingClientRect().top<innerHeight){cur=i;break;}}}setOn(toc[cur]);}
+ addEventListener('scroll',function(){if(!tick){tick=1;requestAnimationFrame(upd);}},{passive:true});
+ addEventListener('resize',upd);upd();
+}
+})();</script>
