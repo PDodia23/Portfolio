@@ -15,6 +15,8 @@ if(tb)tb.addEventListener('click',function(){var l=root.getAttribute('data-theme
 /* mobile menu */
 var nav=d.querySelector('.pd-nav'),mb=d.querySelector('.pd-menu');
 if(mb)mb.addEventListener('click',function(){var o=!nav.classList.contains('is-open');nav.classList.toggle('is-open',o);mb.setAttribute('aria-expanded',o);});
+function closeNav(){if(nav&&nav.classList.contains('is-open')){nav.classList.remove('is-open');mb.setAttribute('aria-expanded','false');}}
+if(mb){d.addEventListener('click',function(e){if(!nav.classList.contains('is-open'))return;var t=e.target;if(mb.contains(t))return;var l=d.getElementById('pd-links');if(l&&l.contains(t)&&!t.closest('a'))return;closeNav();},true);d.addEventListener('touchstart',function(e){if(nav.classList.contains('is-open')&&!mb.contains(e.target)&&!(d.getElementById('pd-links')||nav).contains(e.target))closeNav();},{passive:true});d.addEventListener('keydown',function(e){if(e.key==='Escape')closeNav();});}
 d.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav&&nav.classList.contains('is-open')){nav.classList.remove('is-open');mb.setAttribute('aria-expanded','false');mb.focus();}});
 /* filters */
 var F={"work": {"All": "*", "Client work": "IKSA Equerry", "Concepts": "BB Dew Margins Concur", "Experimentation": "Dew", "Mobile": "BB Dew Margins Concur", "Accessibility": "PR BB"}, "notes": {"All": "*", "Launching": "IKSA", "Research": "Margins BB A11y Row", "Writing": "IKSA BB Row", "Accessibility": "A11y"}};
