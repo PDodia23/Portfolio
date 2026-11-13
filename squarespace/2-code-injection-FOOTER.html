@@ -37,7 +37,7 @@ if(sbtn){var navh=d.querySelector('.pd-nav'),cvl=navh&&navh.querySelector('.pd-c
  function placeS(){if(!navh)return;if(mq.matches&&cvl){li.appendChild(sbtn);cvl.insertBefore(li,cvl.firstChild);}else if(mnu){navh.insertBefore(sbtn,mnu);if(li.parentNode)li.parentNode.removeChild(li);}}
  placeS();mq.addEventListener?mq.addEventListener('change',placeS):mq.addListener(placeS);}
 /* Portfolio rebuild cover: hero video plays inside the laptop and phone mockups, muted */
-var mockSrc=window.PD_HERO_VIDEO||'',mockOv=(window.PD_IMG_BASE||'https://cdn.jsdelivr.net/gh/PDodia23/portfolio@main/images/')+'pr-mock.webp';
+var mockSrc=window.PD_HERO_VIDEO||'',mockOv=(window.PD_IMG_BASE||'https://cdn.jsdelivr.net/gh/PDodia23/portfolio@main/images/')+'pr-mock2.webp';
 if(mockSrc)[].forEach.call(d.querySelectorAll('.pd-site img[src*="/work-04.jpg"],.pd-site .caserow__pv img[src*="/pv-portfolio-rebuild.jpg"]'),function(im){
  var box=im.parentNode,pv=box.classList.contains('caserow__pv');
  var m=d.createElement('div');m.className='pd-mock'+(pv?' pd-mock--pv':'');m.setAttribute('aria-hidden','true');
