@@ -36,6 +36,10 @@ if(sbtn){var navh=d.querySelector('.pd-nav'),cvl=navh&&navh.querySelector('.pd-c
  var li=d.createElement('li');li.className='pd-sndli';
  function placeS(){if(!navh)return;if(mq.matches&&cvl){li.appendChild(sbtn);cvl.insertBefore(li,cvl.firstChild);}else if(mnu){navh.insertBefore(sbtn,mnu);if(li.parentNode)li.parentNode.removeChild(li);}}
  placeS();mq.addEventListener?mq.addEventListener('change',placeS):mq.addListener(placeS);}
+/* HEY footer: the hero video plays inside the letters, always muted */
+var hv=d.querySelector('.pd-hey__v'),hsrc=window.PD_HERO_VIDEO||'';
+if(hv&&hsrc){hv.muted=true;var hstart=function(){if(!hv.src)hv.src=hsrc;hv.play().then(function(){hv.parentNode.classList.add('is-playing');}).catch(function(){});};
+ if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)hstart();else if(hv.src)hv.pause();});},{rootMargin:'200px'}).observe(hv);}else hstart();}
 /* hero video + sound (video file set in data-src once uploaded) */
 var hero=d.querySelector('.pd-hero'),v=hero&&hero.querySelector('video'),sb=d.querySelector('.pd-sound');
 var src=window.PD_HERO_VIDEO||'';
