@@ -47,16 +47,31 @@ if(v&&src){
  v.src=src;v.play().then(function(){hero.classList.add('is-playing');if(sb)sb.hidden=false;}).catch(function(){});
  if(sb)sb.addEventListener('click',function(){v.muted=!v.muted;sb.setAttribute('aria-pressed',String(!v.muted));});
 }
-/* contact form: opens the visitor's email app with the message filled in */
+/* contact form: sends through the hidden Squarespace form block (emails Pooja) */
 var form=d.querySelector('.pd-form');
+function sqSet(el,v){if(!el)return;var pr=el.tagName==='TEXTAREA'?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;Object.getOwnPropertyDescriptor(pr,'value').set.call(el,v);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));el.dispatchEvent(new Event('blur',{bubbles:true}));}
+function sqField(f,word){var r=null;[].forEach.call(f.querySelectorAll('input[type=text],input[type=email],textarea'),function(el){var l=el.labels&&el.labels[0]?el.labels[0].innerText:'';var w=el.closest('.form-item,.field');if(!l&&w)l=w.innerText;if(!r&&new RegExp(word,'i').test(l))r=el;});return r;}
 if(form)form.addEventListener('submit',function(e){e.preventDefault();var ok=true;
  ['name','email','message'].forEach(function(n){var el=form.elements[n];var bad=!el.value.trim()||(n==='email'&&!/^\S+@\S+\.\S+$/.test(el.value));el.setAttribute('aria-invalid',bad?'true':'false');if(bad&&ok){el.focus();ok=false;}});
- var note=form.querySelector('.pd-note');
+ var note=form.querySelector('.pd-note'),btn=form.querySelector('button[type=submit]');
  if(!ok){note.textContent='Please fill in your name, a valid email and a message.';return;}
+ var sq=d.querySelector('form.react-form-contents');
+ if(!sq){note.innerHTML='Sorry, the form isn’t working right now. Please email <a href="mailto:'+form.getAttribute('data-to')+'">'+form.getAttribute('data-to')+'</a>.';return;}
  var t=(form.querySelector('input[name=topic]:checked')||{}).value||'Hello';
- var body=form.elements.message.value+'\n\n'+form.elements.name.value+'\n'+form.elements.email.value;
- location.href='mailto:'+form.getAttribute('data-to')+'?subject='+encodeURIComponent(t+' · from your portfolio')+'&body='+encodeURIComponent(body);
- note.textContent='Your email app should open with the message ready to send.';
+ var nm=form.elements.name.value.trim().split(/\s+/);
+ sqSet(sq.querySelector('input[name=fname]'),nm[0]);
+ sqSet(sq.querySelector('input[name=lname]'),nm.slice(1).join(' ')||'-');
+ sqSet(sq.querySelector('input[type=email]'),form.elements.email.value.trim());
+ sqSet(sqField(sq,'Subject'),t+' · from your portfolio');
+ sqSet(sq.querySelector('textarea')||sqField(sq,'Message'),form.elements.message.value);
+ btn.disabled=true;note.textContent='Sending…';
+ setTimeout(function(){var sb=sq.querySelector('button[type=submit],input[type=submit]');if(sb)sb.click();else sq.requestSubmit();},60);
+ var tries=0,iv=setInterval(function(){tries++;
+  var done=!d.body.contains(sq)||d.querySelector('.form-submission-text,.form-submission-html');
+  var err=d.querySelector('.sqs-block-form .field-error, .sqs-block-form .form-error, .sqs-block-form [class*="error"]:not(:empty)');
+  if(done){clearInterval(iv);form.reset();form.querySelectorAll('[aria-invalid]').forEach(function(x){x.setAttribute('aria-invalid','false');});note.textContent='Thanks, your message is on its way. I’ll reply soon.';btn.disabled=false;}
+  else if(err&&tries>4||tries>60){clearInterval(iv);btn.disabled=false;note.innerHTML='Sorry, that didn’t send. Please email <a href="mailto:'+form.getAttribute('data-to')+'">'+form.getAttribute('data-to')+'</a>.';}
+ },250);
 });
 d.querySelectorAll('.pd-copy').forEach(function(b){b.addEventListener('click',function(){var a=b.getAttribute('data-copy');(navigator.clipboard?navigator.clipboard.writeText(a):Promise.reject()).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy address';},2000);}).catch(function(){b.textContent=a;});});});
 /* notes: highlight the part you are reading */
