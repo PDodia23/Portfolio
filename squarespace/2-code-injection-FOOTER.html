@@ -19,7 +19,7 @@ function closeNav(){if(nav&&nav.classList.contains('is-open')){nav.classList.rem
 if(mb){d.addEventListener('click',function(e){if(!nav.classList.contains('is-open'))return;var t=e.target;if(mb.contains(t))return;var l=d.getElementById('pd-links');if(l&&l.contains(t)&&!t.closest('a'))return;closeNav();},true);d.addEventListener('touchstart',function(e){if(nav.classList.contains('is-open')&&!mb.contains(e.target)&&!(d.getElementById('pd-links')||nav).contains(e.target))closeNav();},{passive:true});d.addEventListener('keydown',function(e){if(e.key==='Escape')closeNav();});}
 d.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav&&nav.classList.contains('is-open')){nav.classList.remove('is-open');mb.setAttribute('aria-expanded','false');mb.focus();}});
 /* filters */
-var F={"work": {"All": "*", "Client work": "IKSA Equerry", "Concepts": "BB Dew Margins Concur", "Experimentation": "Dew", "Mobile": "BB Dew Margins Concur", "Accessibility": "PR BB"}, "notes": {"All": "*", "Launching": "IKSA", "Research": "Margins BB A11y Row", "Writing": "IKSA BB Row", "Accessibility": "A11y"}};
+var F={"work": {"All": "*", "Client work": "Gravitai IKSA Equerry", "Concepts": "BB Dew Margins Concur", "Experimentation": "Dew", "Mobile": "BB Dew Margins Concur", "Accessibility": "PR BB"}, "notes": {"All": "*", "Launching": "IKSA", "Research": "Margins BB A11y Row", "Writing": "IKSA BB Row", "Accessibility": "A11y"}};
 d.querySelectorAll('.pd-site[data-filters]').forEach(function(site){
  var set=F[site.getAttribute('data-filters')];if(!set)return;
  var chips=site.querySelectorAll('.chip--filter');
