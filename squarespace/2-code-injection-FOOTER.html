@@ -54,7 +54,7 @@ if(mockSrc)[].forEach.call(d.querySelectorAll('.pd-site img[src*="/work-04.jpg"]
  else if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)go();else if(on)stop();});},{rootMargin:'150px'}).observe(box);}else go();
 });
 /* IKSA covers: client's launch video plays behind the cover text, muted */
-var ivB=window.PD_IMG_BASE||'https://cdn.jsdelivr.net/gh/PDodia23/portfolio@main/images/',ivSrc=ivB+'iksa-loop.mp4?v=7f036938',ivRM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var ivB=window.PD_IMG_BASE||'https://cdn.jsdelivr.net/gh/PDodia23/portfolio@main/images/',ivSrc=ivB+'iksa-loop.mp4?v=7f036938',ivRM=false;
 if(!ivRM)[].forEach.call(d.querySelectorAll('.pd-site img[src*="/work-02.jpg"],.pd-site .caserow__pv img[src*="/pv-iksa.jpg"],.pd-site section[aria-label="Featured: IKSA"] img.only-dark'),function(im){
  var box=im.parentNode,pv=box.classList.contains('caserow__pv'),home=!!box.closest('section[aria-label="Featured: IKSA"]');
  var m=d.createElement('div');m.className='pd-iv'+(pv?' pd-iv--pv':'')+(home?' pd-iv--home':'');m.setAttribute('aria-hidden','true');
