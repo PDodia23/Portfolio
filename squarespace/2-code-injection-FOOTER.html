@@ -53,6 +53,20 @@ if(mockSrc)[].forEach.call(d.querySelectorAll('.pd-site img[src*="/work-04.jpg"]
  if(pv){var row=box.closest('.caserow')||box.parentNode;row.addEventListener('mouseenter',go);row.addEventListener('mouseleave',stop);row.addEventListener('focus',go);row.addEventListener('blur',stop);}
  else if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)go();else if(on)stop();});},{rootMargin:'150px'}).observe(box);}else go();
 });
+/* IKSA covers: client's launch video plays behind the cover text, muted */
+var ivB=window.PD_IMG_BASE||'https://cdn.jsdelivr.net/gh/PDodia23/portfolio@main/images/',ivSrc=ivB+'iksa-loop.mp4?v=7f036938',ivRM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!ivRM)[].forEach.call(d.querySelectorAll('.pd-site img[src*="/work-02.jpg"],.pd-site .caserow__pv img[src*="/pv-iksa.jpg"],.pd-site section[aria-label="Featured: IKSA"] img.only-dark'),function(im){
+ var box=im.parentNode,pv=box.classList.contains('caserow__pv'),home=!!box.closest('section[aria-label="Featured: IKSA"]');
+ var m=d.createElement('div');m.className='pd-iv'+(pv?' pd-iv--pv':'')+(home?' pd-iv--home':'');m.setAttribute('aria-hidden','true');
+ m.innerHTML='<video muted loop playsinline preload="none"></video><img alt="" decoding="async" src="'+ivB+(home?'ov-home.webp?v=a099c0c1':'ov-work.webp?v=583a5259')+'">';
+ if(getComputedStyle(box).position==='static')box.style.position='relative';
+ box.appendChild(m);var v=m.querySelector('video'),on=false;v.muted=true;
+ function go(){on=true;if(!v.src)v.src=ivSrc;var pr=v.play();if(pr&&pr.catch)pr.catch(function(){});}
+ function stop(){on=false;if(v.src)v.pause();}
+ v.addEventListener('playing',function(){m.classList.add('is-playing');});
+ if(pv){var row=box.closest('.caserow')||box.parentNode;row.addEventListener('mouseenter',go);row.addEventListener('mouseleave',stop);row.addEventListener('focus',go);row.addEventListener('blur',stop);}
+ else if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)go();else if(on)stop();});},{rootMargin:'150px'}).observe(box);}else go();
+});
 /* HEY footer: the hero video plays inside the letters, always muted */
 var hv=d.querySelector('.pd-hey__v'),hsrc=window.PD_HERO_VIDEO||'';
 if(hv&&hsrc){hv.muted=true;var hstart=function(){if(!hv.src)hv.src=hsrc;hv.play().then(function(){hv.parentNode.classList.add('is-playing');}).catch(function(){});};
