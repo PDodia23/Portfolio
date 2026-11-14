@@ -215,6 +215,16 @@ html[data-theme="light"] .pd-site section[aria-label="Next project"] a:hover h2.
 .pd-site .pd-concepts{font:700 11px/1.45 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:calc(96px*var(--k)) 0 0;align-self:flex-start;background:var(--chip);border-radius:999px;padding:8px 16px}
 .pd-site .pd-concepts--grid{grid-column:1/-1;justify-self:start;margin:calc(32px*var(--k)) 0 calc(-24px*var(--k))}
 .pd-site{--pd-stat:clamp(64px,9vw,150px)}
+.pd-site .f:has(>.f[style*="width:44px;height:44px"]){flex-wrap:nowrap!important}.pd-site .f:has(>.f[style*="width:44px;height:44px"])>h3{flex:1 1 0px!important;min-width:0}
+.pd-site .pd-prh{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;pointer-events:none;border-radius:inherit;overflow:hidden}
+.pd-site .pd-prh.is-playing{opacity:1}
+.pd-site .pd-prh__s{position:absolute;left:26.0%;top:28.056%;width:58.79%;height:63.95%;overflow:hidden;border-radius:0 0 .72% .72%/0 0 1.05% 1.05%;background:#000}
+html[data-theme="light"] .pd-site .pd-prh__s{top:27.611%}
+.pd-site .pd-prh__s video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;max-width:none}
+.pd-site .pd-prh__o{position:absolute;inset:0;width:100%;height:100%;max-width:none;display:block}
+.pd-site .pd-prh__o.only-light{display:none}
+html[data-theme="light"] .pd-site .pd-prh__o.only-light{display:block}
+html[data-theme="light"] .pd-site .pd-prh__o.only-dark{display:none}
 .pd-site .pd-mock__l{position:absolute;left:21.942%;top:11.933%;width:58.993%;height:66.821%;overflow:hidden;border-radius:0 0 1.576% 1.576%/0 0 2.302% 2.302%;background:#000}
 .pd-site .pd-mock__p{position:absolute;left:77.439%;top:30.286%;width:16.345%;height:52.707%;overflow:hidden;border-radius:15.141% 15.141% 0 0/7.77% 7.77% 0 0;background:#000}
 .pd-site .pd-mock__p::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,.15) 45%,rgba(0,0,0,.9) 100%)}
@@ -225,7 +235,7 @@ html[data-theme="light"] .pd-site section[aria-label="Next project"] a:hover h2.
 @media (hover:hover) and (min-width:901px){.pd-site .caserow__pv{display:block}.pd-site .caserow:hover .caserow__pv,.pd-site .caserow:focus-visible .caserow__pv{opacity:1;transform:translateY(calc(-50% + var(--pvy,0px))) scale(1)}}
 @media (prefers-reduced-motion:reduce){.pd-site .caserow__pv{transition:none}}
 /* how I work hero */
-.hiw{position:relative;padding:calc(128px*var(--k)) var(--gut) calc(64px*var(--k));display:flex;flex-direction:column;gap:24px}
+.hiw{position:relative;padding:calc(96px*var(--k)) var(--gut) calc(56px*var(--k));display:flex;flex-direction:column;gap:24px}
 .hiw__h{font:300 clamp(44px,6.04vw,96px)/1.1 var(--sans);letter-spacing:-.04em;max-width:1000px}
 .hiw__sel{position:relative;display:inline-block;border:1.5px solid var(--text);padding:0 .12em;margin:0 .05em;line-height:1}
 .hiw__sel em{font-size:1.17em}
