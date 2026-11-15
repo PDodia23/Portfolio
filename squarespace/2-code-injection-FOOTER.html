@@ -90,14 +90,13 @@ if(!ivRM)[].forEach.call(d.querySelectorAll('.pd-site img[src*="/work-02.jpg"],.
   else if(n%2===0&&(av-g)/2>=200){k.forEach(function(c){c.style.minWidth='0';c.style.flex='1 1 calc(50% - '+(g/2+0.5)+'px)';});}
  });}
  bal();var bt;window.addEventListener('resize',function(){clearTimeout(bt);bt=setTimeout(bal,120);});if(d.fonts&&d.fonts.ready)d.fonts.ready.then(bal);})();
-/* Sticky nav: fixed once you scroll past it; slides away on scroll down, back on scroll up */
+/* Sticky nav: stays fixed at the top with a blurred background whenever the page is scrolled */
 (function(){var nav=d.querySelector('.pd-nav');if(!nav)return;var over=nav.classList.contains('pd-nav--over'),sp=d.createElement('div');sp.className='pd-nav-spacer';nav.parentNode.insertBefore(sp,nav);
  var last=window.pageYOffset||0,stuck=false,ticking=false;
  function h(){return over?0:nav.offsetHeight;}
- function upd(){ticking=false;var y=window.pageYOffset||0,lim=Math.max(nav.offsetHeight,over?(d.querySelector('.pd-hero')||nav).offsetHeight*0.6:nav.offsetHeight);
-  if(!stuck&&y>lim){var hh=h();stuck=true;if(hh){sp.style.display='block';sp.style.height=hh+'px';}nav.classList.add('pd-nav--stuck');}
+ function upd(){ticking=false;var y=window.pageYOffset||0,lim=0;
+  if(!stuck&&y>lim){var hh=h();stuck=true;if(hh){sp.style.display='block';sp.style.height=hh+'px';}nav.classList.add('pd-nav--stuck','is-shown');}
   else if(stuck&&y<=0){stuck=false;sp.style.display='none';nav.classList.remove('pd-nav--stuck','is-shown');}
-  if(stuck){if(y<last-4)nav.classList.add('is-shown');else if(y>last+4&&!nav.classList.contains('is-open'))nav.classList.remove('is-shown');}
   last=y;}
  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(upd);}},{passive:true});
  nav.addEventListener('focusin',function(){if(stuck)nav.classList.add('is-shown');});upd();})();
