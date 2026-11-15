@@ -215,6 +215,18 @@ html[data-theme="light"] .pd-site section[aria-label="Next project"] a:hover h2.
 .pd-site .pd-concepts{font:700 11px/1.45 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:calc(96px*var(--k)) 0 0;align-self:flex-start;background:var(--chip);border-radius:999px;padding:8px 16px}
 .pd-site .pd-concepts--grid{grid-column:1/-1;justify-self:start;margin:calc(32px*var(--k)) 0 calc(-24px*var(--k))}
 .pd-site{--pd-stat:clamp(64px,9vw,150px)}
+/* 15 Nov: sticky nav (hides on scroll down, shows on scroll up) with a blurred background */
+.pd-nav-spacer{display:none}
+.pd-nav.pd-nav--stuck{position:fixed;top:0;left:0;right:0;z-index:60;padding-top:16px;padding-bottom:16px;color:var(--text);background:rgba(0,0,0,.62);-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);transform:translateY(-110%);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+html[data-theme="light"] .pd-nav.pd-nav--stuck{background:rgba(255,255,255,.72)}
+.pd-nav.pd-nav--stuck.is-shown,.pd-nav.pd-nav--stuck.is-open{transform:none}
+.pd-nav.pd-nav--stuck .pd-links a[aria-current="page"]{color:var(--accent)}
+@media (max-width:900px){.pd-nav.pd-nav--stuck{padding-top:10px;padding-bottom:10px}}
+@media (prefers-reduced-motion:reduce){.pd-nav.pd-nav--stuck{transition:none}}
+/* 15 Nov: on phones the theme switch sits in the nav, so it never covers text */
+@media (max-width:900px){.pd-theme.pd-theme--nav{position:static;width:40px;height:40px;background:none;box-shadow:none;color:inherit;margin-left:auto;margin-right:4px}.pd-nav>.pd-sound+.pd-theme--nav{margin-left:0}.pd-theme--nav svg{width:20px;height:20px}}
+/* 15 Nov: 1px button borders on phones (0.5px drew unevenly on iPhone) */
+@media (max-width:900px){.pd-site .pill{box-shadow:inset 0 0 0 1px var(--text)}.pd-site .pill--primary{box-shadow:none}}
 .pd-site .pd-swn{transition:opacity .3s}.pd-site .pd-swn:hover{opacity:.85}.pd-site .pd-swn:focus-visible{outline:2px solid #2b5b5e;outline-offset:3px}
 .pd-site .f:has(>.f[style*="width:44px;height:44px"]){flex-wrap:nowrap!important}.pd-site .f:has(>.f[style*="width:44px;height:44px"])>h3{flex:1 1 0px!important;min-width:0}
 .pd-site .pd-prh{position:absolute;inset:0;opacity:0;transition:opacity .6s ease;pointer-events:none;border-radius:inherit;overflow:hidden}
