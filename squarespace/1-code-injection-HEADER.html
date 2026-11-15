@@ -219,6 +219,7 @@ html[data-theme="light"] .pd-site section[aria-label="Next project"] a:hover h2.
 .pd-nav-spacer{display:none}
 .pd-nav.pd-nav--stuck{position:fixed;top:0;left:0;right:0;z-index:60;padding-top:16px;padding-bottom:16px;color:var(--text);background:none;transform:translateY(-110%);transition:transform .35s cubic-bezier(.22,1,.36,1)}
 .pd-nav.pd-nav--stuck.is-shown,.pd-nav.pd-nav--stuck.is-open{transform:none}
+.pd-nav.pd-nav--stuck::before{content:"";position:absolute;left:0;right:0;top:0;bottom:-36px;z-index:-1;pointer-events:none;background:linear-gradient(to bottom,var(--bg) 0%,var(--bg) 55%,transparent 100%)}
 .pd-nav.pd-nav--stuck .pd-links a[aria-current="page"]{color:var(--accent)}
 @media (max-width:900px){.pd-nav.pd-nav--stuck{padding-top:10px;padding-bottom:10px}}
 @media (prefers-reduced-motion:reduce){.pd-nav.pd-nav--stuck{transition:none}}
